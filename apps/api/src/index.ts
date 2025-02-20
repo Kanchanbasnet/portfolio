@@ -1,15 +1,18 @@
 import express from 'express';
 import cors from 'cors';
-// import utils from 'utils';
+import { connection } from './connections/mongo.connection';
+import ErrorHandler from './middlewares/errors';
+import router from './routes/project/project.routes';
 
 const PORT = process.env.PORT || 5000;
 
 const app = express();
 app.use(cors());
 
-app.get('/', (req, res) => {
-  res.json({ message: 'Api running successfully' });
-});
+connection();
+app.use(ErrorHandler);
+
+app.use('/api', router);
 
 app.listen(PORT, () => {
   console.log(`Server running on PORT ${PORT}`);
