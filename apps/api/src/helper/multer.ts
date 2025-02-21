@@ -1,8 +1,18 @@
 import multer from 'multer';
+import fs from 'fs';
+import path from 'path';
+
+const uploadDir = path.resolve(__dirname, '../uploads');
+
+if (!fs.existsSync(uploadDir)) {
+  fs.mkdirSync(uploadDir);
+  
+  console.log('uploads directory created');
+}
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'Uploads');
+    cb(null, uploadDir);
   },
   filename: function (req, file, cb) {
     const uniqueSuffix = Date.now() + '-' + Math.round(Math.random());
@@ -12,5 +22,4 @@ const storage = multer.diskStorage({
 
 export const upload = multer({
   storage: storage,
-  limits: { fileSize: 1000000 },
 });
