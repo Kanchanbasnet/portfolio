@@ -16,8 +16,7 @@ const PersonalInformationSchema = new Schema({
     required: true,
   },
   image: {
-    data: Buffer,
-    contentType: String,
+    type: String,
   },
   contactInformation: {
     email: {
