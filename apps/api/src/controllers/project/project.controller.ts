@@ -63,13 +63,55 @@ export const getProjectById = async (
 ) => {
   try {
     const { projectId } = req.params;
-    const project = await Project.findById(projectId );
+    const project = await Project.findById(projectId);
     if (!project) {
       throw new CustomError('Project not found', 404);
     }
     res
       .status(200)
       .send({ message: 'Projects fetched successfully', data: project });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const updateProjectById = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const { projectId } = req.params;
+    const project = await Project.findById(projectId);
+    if (!project) {
+      throw new CustomError('Project not found', 404);
+    }
+    const { title, techStack, githubLink, liveLink } = req.body;
+    const image = req.file ? req.file.filename : project.image;
+    await Project.findByIdAndUpdate(
+      projectId,
+      { title, techStack, githubLink, liveLink, image },
+      { new: true },
+    );
+    res.status(200).send({ message: 'Project Updated Successfully' });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const deleteProjectById = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const { projectId } = req.params;
+    const project = await Project.findByIdAndDelete(projectId);
+    if (!project) {
+      throw new CustomError('Project Not Found', 404);
+    }
+    await Project.findByIdAndDelete(projectId);
+    res.status(200).send({ message: 'Project deleted Successfully.' });
   } catch (error) {
     next(error);
   }
