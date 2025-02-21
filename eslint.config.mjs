@@ -20,4 +20,10 @@ export default [
     ],
   },
   eslintPluginPrettierRecommended,
+
+  {
+    rules: {
+      '@typescript-eslint/no-unused-vars': 'off',
+    },
+  },
 ];
