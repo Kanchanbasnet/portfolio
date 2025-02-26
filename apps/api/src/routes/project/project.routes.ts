@@ -10,10 +10,10 @@ import {
 
 const router = express.Router();
 
-router.post('/addProject', upload.single('image'), addProject);
-router.get('/project', getProject);
-router.get('/project/:projectId', getProjectById);
-router.patch('/project/:projectId', upload.single('image'), updateProjectById);
-router.delete('/project/:projectId', deleteProjectById);
+router.post('/', upload.single('image'), addProject);
+router.get('/', getProject);
+router.get('/:projectId', getProjectById);
+router.patch('/:projectId', upload.single('image'), updateProjectById);
+router.delete('/:projectId', deleteProjectById);
 
 export default router;
