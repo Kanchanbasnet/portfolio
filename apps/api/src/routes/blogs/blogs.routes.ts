@@ -10,10 +10,10 @@ import {
 
 const router = express.Router();
 
-router.post('/addBlog', upload.single('image'), addBlogs);
-router.get('/getBlogs', getBlogs);
+router.post('/', upload.single('image'), addBlogs);
+router.get('/', getBlogs);
 router.get('/:blogId', getBlogById);
-router.patch('/updateBlog/:blogId', upload.single('image'), updateBlogById);
-router.delete('/deleteBlog/:blogId', deleteBlogById);
+router.patch('/:blogId', upload.single('image'), updateBlogById);
+router.delete('/:blogId', deleteBlogById);
 
 export default router;

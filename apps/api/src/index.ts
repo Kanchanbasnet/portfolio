@@ -18,7 +18,7 @@ app.use(cors());
 connection();
 
 app.use('/api/projects', router);
-app.use('/api/blog', blogRouter);
+app.use('/api/blogs', blogRouter);
 app.use('/api/personalInformation', personalInformationRouter);
 app.use('/api/about', aboutRouter);
 

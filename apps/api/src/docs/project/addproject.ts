@@ -9,7 +9,7 @@ export const addProject = {
       {
         name: 'title',
         in: 'formData',
-        description: 'The title of the project',
+        description: 'The description of the project',
         required: true,
         type: 'string',
       },
@@ -18,7 +18,10 @@ export const addProject = {
         in: 'formData',
         description: 'The technologies used in the project',
         required: true,
-        type: 'string',
+        type: 'array',
+        items: {
+          type: 'string',
+        },
       },
       {
         name: 'githubLink',
